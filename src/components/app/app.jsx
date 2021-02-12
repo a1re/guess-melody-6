@@ -23,7 +23,10 @@ const App = (props) => {
           <ArtistQuestionScreen />
         </Route>
         <Route exact path="/dev-genre">
-          <GenreQuestionScreen question={firstQuestion}/>
+          <GenreQuestionScreen
+            question={firstQuestion}
+            onAnswer={() => {}}
+          />
         </Route>
         <Route exact path="/login">
           <AuthScreen />
