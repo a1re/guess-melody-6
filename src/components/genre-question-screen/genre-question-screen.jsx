@@ -32,8 +32,8 @@ const GenreQuestionScreen = (props) => {
         <h2 className="game__title">Выберите {genre} треки</h2>
         <form
           className="game__tracks"
-          onSubmit={(env) => {
-            env.preventDefault();
+          onSubmit={(evt) => {
+            evt.preventDefault();
             onAnswer(question, userAnswers)
           }}
         >
