@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import genreQuestionProp from './genre-question.prop';
+import AudioPlayer from '../audio-player/audio-player';
 
 const GenreQuestionScreen = (props) => {
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
@@ -39,10 +40,10 @@ const GenreQuestionScreen = (props) => {
         >
           {answers.map((answer, id) => (
             <div key={`${id}-${answer.src}`} className="track">
-              <button className="track__button track__button--play" type="button"></button>
-              <div className="track__status">
-                <audio src={answer.src} />
-              </div>
+              <AudioPlayer
+                defaultIsPlaying={id === 0}
+                src={answer.src}
+              />
               <div className="game__answer">
                 <input
                   className="game__input visually-hidden"
