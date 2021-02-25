@@ -2,12 +2,10 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import genreQuestionProp from './genre-question.prop';
-import AudioPlayer from '../audio-player/audio-player';
 
 const GenreQuestionScreen = (props) => {
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
-  const [activePlayer, setActivePlayer] = useState(0);
-  const {onAnswer, question} = props;
+  const {onAnswer, question, renderPlayer} = props;
   const {answers, genre} = question;
 
   return (
@@ -41,11 +39,7 @@ const GenreQuestionScreen = (props) => {
         >
           {answers.map((answer, id) => (
             <div key={`${id}-${answer.src}`} className="track">
-              <AudioPlayer
-                isPlaying={id === activePlayer}
-                src={answer.src}
-                onPlayButtonClick={() => setActivePlayer(activePlayer === id ? -1 : id)}
-              />
+              {renderPlayer(answer.src, id)}
               <div className="game__answer">
                 <input
                   className="game__input visually-hidden"
@@ -71,7 +65,8 @@ const GenreQuestionScreen = (props) => {
 
 GenreQuestionScreen.protoTypes = {
   onAnswer: PropTypes.func.isRequired,
-  question: genreQuestionProp
+  question: genreQuestionProp,
+  renderPlayer: PropTypes.func.isRequired
 };
 
 export default GenreQuestionScreen;

@@ -1,12 +1,10 @@
-  import React, {useState} from 'react';
+  import React from 'react';
   import {Link} from 'react-router-dom';
   import PropTypes from 'prop-types';
   import artistQuestionProp from './artist-question.prop';
-  import AudioPlayer from '../audio-player/audio-player';
 
   const ArtistQuestionScreen = (props) => {
-    const [isPlaying, setIsPlaying] = useState(true);
-    const {onAnswer, question} = props;
+    const {onAnswer, question, renderPlayer} = props;
     const {answers, song} = question;
 
     return (
@@ -33,11 +31,7 @@
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <div className="track">
-              <AudioPlayer
-                isPlaying={isPlaying}
-                src={song.src}
-                onPlayButtonClick={() => setIsPlaying(!isPlaying)}
-              />
+              {renderPlayer(song.src, 0)}
             </div>
           </div>
 
@@ -73,7 +67,8 @@
 
   ArtistQuestionScreen.propTypes = {
     onAnswer: PropTypes.func.isRequired,
-    question: artistQuestionProp
+    question: artistQuestionProp,
+    renderPlayer: PropTypes.func.isRequired
   };
 
   export default ArtistQuestionScreen;
