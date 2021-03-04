@@ -1,22 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
-import {GameType, FIRST_GAME_STEP} from '../../const';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
+import {GameType} from '../../const';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import artistQuestionProp from '../artist-question-screen/artist-question.prop';
 import genreQuestionProp from '../genre-question-screen/genre-question.prop';
 
 import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player';
-import withActivePlayer from '../../hocs/with-audio-player/with-audio-player';
 
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
-const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
+const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 
 const GameScreen = (props) => {
-  const [step, setStep] = useState(FIRST_GAME_STEP);
-
-  const {questions} = props;
+  const {questions, step, onUserAnswer} = props;
   const question = questions[step];
 
   if (step >= questions.length || !question) {
@@ -30,14 +29,14 @@ const GameScreen = (props) => {
       return (
         <ArtistQuestionScreenWrapped
           question={question}
-          onAnswer={() => setStep((prevStep) => prevStep + 1)}
+          onAnswer={onUserAnswer}
         />
       );
     case GameType.GENRE:
       return (
         <GenreQuestionScreenWrapped
           question={question}
-          onAnswer={() =>setStep((prevStep) => prevStep + 1 )}
+          onAnswer={onUserAnswer}
         />
       );
   }
@@ -48,7 +47,20 @@ const GameScreen = (props) => {
 GameScreen.propTypes = {
   questions: PropTypes.arrayOf(
     PropTypes.oneOfType([artistQuestionProp, genreQuestionProp]).isRequired
-  )
+  ),
+  step: PropTypes.number.isRequired,
+  onUserAnswer: PropTypes.func.isRequired
 };
 
-export default GameScreen;
+const mapStateToProps = (state) => ({
+  step: state.step
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onUserAnswer() {
+    dispatch(ActionCreator.incrementStep());
+  }
+});
+
+export {GameScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
