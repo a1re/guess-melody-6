@@ -4,7 +4,8 @@ import {GameType} from '../const';
 export const ActionType = {
   INCREMENT_MISTAKES: `game/incrementMistake`,
   INCREMENT_STEP: `game/incrementStep`,
-  RESET_GAME: `game/reset`
+  RESET_GAME: `game/reset`,
+  LOAD_QUESTIONS: `data/loadQuestions`
 };
 
 export const ActionCreator = {
@@ -31,5 +32,9 @@ export const ActionCreator = {
       type: ActionType.INCREMENT_MISTAKES,
       payload: answerIsCorrect ? 0 : 1
     }
-  }
+  },
+  loadQuestions: (questions) => ({
+    type: ActionType.LOAD_QUESTIONS,
+    payload: questions
+  })
 };
