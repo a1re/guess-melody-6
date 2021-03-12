@@ -36,13 +36,13 @@ const GameScreen = (props) => {
   if (mistakes >= MAX_MISTAKE_COUNT) {
     return (
       <Redirect to="/lose" />
-    )
+    );
   }
 
   if (step >= questions.length || !question) {
     return (
       <Redirect to="/result" />
-    )
+    );
   }
 
   switch (question.type) {
@@ -71,7 +71,7 @@ const GameScreen = (props) => {
 
 GameScreen.propTypes = {
   questions: PropTypes.arrayOf(
-    PropTypes.oneOfType([artistQuestionProp, genreQuestionProp]).isRequired
+      PropTypes.oneOfType([artistQuestionProp, genreQuestionProp]).isRequired
   ),
   step: PropTypes.number.isRequired,
   onUserAnswer: PropTypes.func.isRequired,

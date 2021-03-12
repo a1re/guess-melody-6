@@ -26,7 +26,7 @@ const WinScreen = (props) => {
       </button>
     </section>
   );
-}
+};
 
 WinScreen.propTypes = {
   questionsCount: PropTypes.number.isRequired,
@@ -38,13 +38,14 @@ WinScreen.propTypes = {
 const mapStateToProps = ({step, mistakes}) => ({
   questionsCount: step,
   mistakesCount: mistakes
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   resetGame() {
     dispatch(ActionCreator.resetGame());
   }
-})
+});
+
 
 export {WinScreen};
 export default connect(mapStateToProps, mapDispatchToProps)(WinScreen);

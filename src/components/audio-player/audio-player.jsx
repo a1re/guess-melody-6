@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
-const AudioPlayer = ({isPlaying, src, onPlayButtonClick}) =>{
+const AudioPlayer = ({isPlaying, src, onPlayButtonClick}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const audioRef = useRef();
@@ -35,11 +35,11 @@ const AudioPlayer = ({isPlaying, src, onPlayButtonClick}) =>{
         onClick={onPlayButtonClick}
       />
       <div className="track__status">
-        <audio src={src} ref={audioRef}/>
+        <audio src={src} ref={audioRef} />
       </div>
     </Fragment>
   );
-}
+};
 
 AudioPlayer.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired,

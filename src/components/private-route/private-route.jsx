@@ -12,8 +12,8 @@ const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
       render={(routeProps) => {
         return (
           authorizationStatus === AuthorizationStatus.AUTH
-          ? render(routeProps)
-          : <Redirect to={`/login`} />
+            ? render(routeProps)
+            : <Redirect to={`/login`} />
         );
       }}
     />
@@ -31,5 +31,5 @@ const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus
 });
 
-export {PrivateRoute}
-export default connect(mapStateToProps, null)(PrivateRoute);
+export {PrivateRoute};
+export default connect(mapStateToProps)(PrivateRoute);

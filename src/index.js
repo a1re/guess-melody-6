@@ -12,21 +12,21 @@ import {checkAuth} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 
 const api = createAPI(
-  () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
-)
+    () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api))
-  )
+    reducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
 store.dispatch(checkAuth());
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.querySelector(`#root`)
-)
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.querySelector(`#root`)
+);

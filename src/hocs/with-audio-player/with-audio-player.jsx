@@ -1,5 +1,5 @@
-import React, {Component, PureComponent} from 'react';
-import AudioPlayer from "../../components/audio-player/audio-player";
+import React, {PureComponent} from 'react';
+import AudioPlayer from '../../components/audio-player/audio-player';
 
 const withActivePlayer = (Component) => {
   class WithActivePlayer extends PureComponent {
@@ -27,13 +27,13 @@ const withActivePlayer = (Component) => {
             />
           );
         }}
-        />;
+      />;
     }
   }
 
   WithActivePlayer.propTypes = {};
 
   return WithActivePlayer;
-}
+};
 
 export default withActivePlayer;

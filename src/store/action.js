@@ -32,7 +32,7 @@ export const ActionCreator = {
     return {
       type: ActionType.INCREMENT_MISTAKES,
       payload: answerIsCorrect ? 0 : 1
-    }
+    };
   },
   loadQuestions: (questions) => ({
     type: ActionType.LOAD_QUESTIONS,
