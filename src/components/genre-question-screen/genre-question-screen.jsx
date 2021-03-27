@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import GenreQuestionItem from '../genre-question-item/genre-question-item';
 import genreQuestionProp from './genre-question.prop';
+import {useUserAnswers} from '../../hooks/use-user-answers';
 
 const GenreQuestionScreen = (props) => {
-  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
   const {onAnswer, question, renderPlayer, children} = props;
   const {answers, genre} = question;
+
+  const [userAnswers, handleAnswer, handleAnswerChange] = useUserAnswers(question, onAnswer);
 
   return (
     <section className="game game--genre">
@@ -30,26 +33,18 @@ const GenreQuestionScreen = (props) => {
           className="game__tracks"
           onSubmit={(evt) => {
             evt.preventDefault();
-            onAnswer(question, userAnswers)
+            handleAnswer(question, userAnswers)
           }}
         >
           {answers.map((answer, id) => (
-            <div key={`${id}-${answer.src}`} className="track">
-              {renderPlayer(answer.src, id)}
-              <div className="game__answer">
-                <input
-                  className="game__input visually-hidden"
-                  type="checkbox" name="answer"
-                  value={`answer-${id}`}
-                  id={`answer-${id}`}
-                  checked={userAnswers[id]}
-                  onChange={({target}) => {
-                    const value = target.checked;
-                    setUserAnswers([...userAnswers.slice(0, id), value, ...userAnswers.slice(id + 1)])
-                  }}/>
-                <label className="game__check" htmlFor={`answer-${id}`}>Отметить</label>
-              </div>
-            </div>
+            <GenreQuestionItem
+              answer={answer}
+              id={id}
+              key={`${id}-${answer.src}`}
+              onChange={handleAnswerChange}
+              renderPlayer={renderPlayer}
+              userAnswer={userAnswers[id]}
+            />
           ))}
 
           <button className="game__submit button" type="submit">Ответить</button>
