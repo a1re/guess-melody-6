@@ -6,10 +6,15 @@ import NotFoundScreen from './not-found-screen';
 
 it(`Should NotFoundScreen render correctly`, () => {
   const history = createMemoryHistory();
-  const {container} = render(
+  const {getByText} = render(
       <Router history={history}>
         <NotFoundScreen />
       </Router>
   );
-  expect(container).toMatchSnapshot();
+
+  const headerElement = getByText(`404. Page not found`);
+  const linkElement = getByText(`Вернуться на главную`);
+
+  expect(headerElement).toBeInTheDocument();
+  expect(linkElement).toBeInTheDocument();
 });
