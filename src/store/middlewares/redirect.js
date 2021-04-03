@@ -7,4 +7,4 @@ export const redirect = (_store) => (next) => (action) => {
   }
 
   return next(action);
-}
+};

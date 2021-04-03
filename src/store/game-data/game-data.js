@@ -10,7 +10,7 @@ const gameData = createReducer(initialState, (builder) =>{
   builder.addCase(loadQuestions, (state, action) => {
     state.isDataLoaded = true;
     state.questions = action.payload;
-  })
-})
+  });
+});
 
 export {gameData};

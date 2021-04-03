@@ -33,7 +33,7 @@ const GenreQuestionScreen = (props) => {
           className="game__tracks"
           onSubmit={(evt) => {
             evt.preventDefault();
-            handleAnswer(question, userAnswers)
+            handleAnswer(question, userAnswers);
           }}
         >
           {answers.map((answer, id) => (
@@ -54,7 +54,7 @@ const GenreQuestionScreen = (props) => {
   );
 };
 
-GenreQuestionScreen.protoTypes = {
+GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: genreQuestionProp,
   renderPlayer: PropTypes.func.isRequired,

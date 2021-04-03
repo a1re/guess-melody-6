@@ -11,7 +11,7 @@ const Mistakes = (props) => {
       {mistakes.map((item, index) => <div key={`mistake-${index}`} className="wrong" />)}
     </div>
   );
-}
+};
 
 Mistakes.propTypes = {
   count: PropTypes.number.isRequired

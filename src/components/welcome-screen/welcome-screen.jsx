@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {resetGame} from '../../store/action';
 
@@ -37,6 +37,6 @@ const WelcomeScreen = (props) => {
 
 WelcomeScreen.propTypes = {
   errorsCount: PropTypes.number.isRequired
-}
+};
 
 export default WelcomeScreen;
